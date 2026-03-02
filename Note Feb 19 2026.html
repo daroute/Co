@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tipet Pay - Secure Payment Confirmation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.container {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 15px;
+    width: 400px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+h1 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #00c6ff;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.timer {
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.success {
+    margin-top: 15px;
+    color: #00ffae;
+    display: none;
+    font-size: 14px;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Tipet Pay</h1>
+    <div class="subtitle">Secure Payment Confirmation Portal</div>
+
+    <div class="input-group">
+        <label for="confirmNumber">Confirmation Number</label>
+        <input type="text" id="confirmNumber" placeholder="Enter your confirmation number">
+    </div>
+
+    <button onclick="confirmPayment()">Confirm Payment</button>
+
+    <div class="success" id="successMessage">
+        ✅ Payment Confirmed Successfully!
+    </div>
+
+    <div class="timer">
+        Time Remaining: <span id="countdown">24:00:00</span>
+    </div>
+
+    <footer>
+        © 2026 Tipet Pay. All Rights Reserved.
+    </footer>
+</div>
+
+<script>
+// 24 hour countdown
+let totalSeconds = 24 * 60 * 60;
+
+function updateCountdown() {
+    let hours = Math.floor(totalSeconds / 3600);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    let seconds = totalSeconds % 60;
+
+    document.getElementById("countdown").textContent =
+        String(hours).padStart(2, '0') + ":" +
+        String(minutes).padStart(2, '0') + ":" +
+        String(seconds).padStart(2, '0');
+
+    if (totalSeconds > 0) {
+        totalSeconds--;
+    }
+}
+
+setInterval(updateCountdown, 1000);
+
+function confirmPayment() {
+    const input = document.getElementById("confirmNumber").value;
+    const message = document.getElementById("successMessage");
+
+    if(input.trim() !== "") {
+        message.style.display = "block";
+    } else {
+        alert("Please enter a valid confirmation number.");
+    }
+}
+</script>
+
+</body>
+</html>
